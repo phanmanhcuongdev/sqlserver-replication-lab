@@ -1,0 +1,57 @@
+services:
+  sql1:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sql1
+    hostname: sql1
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Developer"
+      MSSQL_SA_PASSWORD: "Pcuong@2411"
+    ports:
+      - "1434:1433"
+    volumes:
+      - sql1_data:/var/opt/mssql
+    networks:
+      - mssql-net
+    restart: unless-stopped
+
+  sql2:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sql2
+    hostname: sql2
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Developer"
+      MSSQL_SA_PASSWORD: "Pcuong@2411"
+    ports:
+      - "1435:1433"
+    volumes:
+      - sql2_data:/var/opt/mssql
+    networks:
+      - mssql-net
+    restart: unless-stopped
+
+  sql3:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sql3
+    hostname: sql3
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Developer"
+      MSSQL_SA_PASSWORD: "Pcuong@2411"
+    ports:
+      - "1436:1433"
+    volumes:
+      - sql3_data:/var/opt/mssql
+    networks:
+      - mssql-net
+    restart: unless-stopped
+
+networks:
+  mssql-net:
+    driver: bridge
+
+volumes:
+  sql1_data:
+  sql2_data:
+  sql3_data:
