@@ -1,0 +1,2 @@
+CREATE DATABASE SchoolDB_North;
+GO
