@@ -1,57 +1,54 @@
 services:
-  sql1:
+  db1:
     image: mcr.microsoft.com/mssql/server:2022-latest
-    container_name: sql1
-    hostname: sql1
     environment:
       ACCEPT_EULA: "Y"
-      MSSQL_PID: "Developer"
       MSSQL_SA_PASSWORD: "Pcuong@2411"
+      MSSQL_PID: "Developer"
+      MSSQL_LCID: "1033"
+      MSSQL_AGENT_ENABLED: true
+    volumes:
+      - db1_data:/var/opt/mssql
     ports:
       - "1434:1433"
-    volumes:
-      - sql1_data:/var/opt/mssql
     networks:
-      - mssql-net
-    restart: unless-stopped
+      - sqlnet
 
-  sql2:
+  db2:
     image: mcr.microsoft.com/mssql/server:2022-latest
-    container_name: sql2
-    hostname: sql2
     environment:
       ACCEPT_EULA: "Y"
-      MSSQL_PID: "Developer"
       MSSQL_SA_PASSWORD: "Pcuong@2411"
+      MSSQL_PID: "Developer"
+      MSSQL_LCID: "1033"
+      MSSQL_AGENT_ENABLED: true
+    volumes:
+      - db2_data:/var/opt/mssql
     ports:
       - "1435:1433"
-    volumes:
-      - sql2_data:/var/opt/mssql
     networks:
-      - mssql-net
-    restart: unless-stopped
+      - sqlnet
 
-  sql3:
+  db3:
     image: mcr.microsoft.com/mssql/server:2022-latest
-    container_name: sql3
-    hostname: sql3
     environment:
       ACCEPT_EULA: "Y"
-      MSSQL_PID: "Developer"
       MSSQL_SA_PASSWORD: "Pcuong@2411"
+      MSSQL_PID: "Developer"
+      MSSQL_LCID: "1033"
+      MSSQL_AGENT_ENABLED: true
+    volumes:
+      - db3_data:/var/opt/mssql
     ports:
       - "1436:1433"
-    volumes:
-      - sql3_data:/var/opt/mssql
     networks:
-      - mssql-net
-    restart: unless-stopped
-
-networks:
-  mssql-net:
-    driver: bridge
+      - sqlnet
 
 volumes:
-  sql1_data:
-  sql2_data:
-  sql3_data:
+  db1_data:
+  db2_data:
+  db3_data:
+
+networks:
+  sqlnet:
+    driver: bridge
